@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <input type="text" class="txt" placeholder="Add a Task" />
+      <div class="notcomplete">
+        <h3>Not Completed</h3>
+      </div>
+
+      <div class="complete">
+        <h3>Completed</h3>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    $(".txt").on("keyup", function(e) {
+      if (e.keyCode == 13 && $(".txt").val() != "") {
+        var task = $('<div class="task"></div>').text($(".txt").val());
+        var deleteBtn = $('<i class="fa fa-trash-alt"></i>').click(function() {
+          var p = $(this).parent();
+          p.fadeOut(function() {
+            p.remove();
+          });
+        });
+
+        var check = $('<i class="fa fa-check"></li>').click(function() {
+          var p = $(this).parent();
+          p.fadeOut(function() {
+            $(".complete").append(p);
+            p.fadeIn();
+          });
+          $(this).remove();
+        });
+
+        task.append(deleteBtn, check);
+        $(".notcomplete").append(task);
+        $(".txt").val("");
+      }
+    });
+  </script>
+</html>
